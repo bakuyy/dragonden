@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './components/homePage'; // Import HomePage
 import LandingPage from './components/LandingPage';
 import GetSerial from "./components/GetSerial"
-import StreamlitDashboard from './components/Streamlit'; 
-
+import StreamlitDashboard from './components/StreamlitDashboard';
 const YourApp = () => {
     return (
         <Router>
