@@ -34,10 +34,9 @@ def read_serial():
     global select_index
     while True:
         value = ser.readline()
-        valueInString = str(value, 'UTF-8', errors='replace').strip()  # Handle potential UnicodeDecodeError
+        valueInString = str(value, 'UTF-8', errors='replace').strip()  
         if valueInString:
             state = valueInString.split('#')
-            # Assuming the second part of the state contains the direction
             if len(state) > 1:
                 direction = state[1].strip()
                 handle_serial_toggle(direction)
@@ -48,6 +47,7 @@ def handle_serial_toggle(direction):
         select_index = (select_index + 1) % dragon_count
     elif direction == "Left":
         select_index = (select_index - 1 + dragon_count) % dragon_count
+    print(select_index)
 
 @app.route('/get_selected_index', methods=['GET'])
 def get_selected_index():

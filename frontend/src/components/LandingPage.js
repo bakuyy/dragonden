@@ -15,7 +15,10 @@ const LandingPage = ({ serialData }) => {
   const [showImage, setShowImage] = useState(false);
   const [imageType, setImageType] = useState("");
   const [text, setText] = useState("");
-
+  const [currStock, setCurrStock] = useState("");
+  const arr = ['AAPL', 'MICROSOFT', 'GOOGL', 'AMZN']; 
+  const [currentStockIndex, setCurrentStockIndex] = useState(0); 
+  const [savedStocks,setSavedStocks] = useState([])
   const handleFinish = () => {
     navigate('/');
   };
@@ -31,24 +34,37 @@ const LandingPage = ({ serialData }) => {
 
   const handleSerialToggle = (data) => {
     if (data[1] === "Right") {
-      setSelectIndex((prevIndex) => (prevIndex + 1) % dragon_count);
     } else if (data[1] === "Left") {
-      setSelectIndex((prevIndex) => (prevIndex - 1 + dragon_count) % dragon_count);
     } else if (data[1] === "Yes") {
       setMatch(true);
       setImageType("match");
       setShowImage(true);
+      setCurrStock(arr[currentStockIndex]); 
       setTimeout(() => {
         setShowImage(false);
+        nextStock(); 
       }, 1000);
+      setSavedStocks((prevSaved) => [...prevSaved, arr[currentStockIndex]]); 
     } else if (data[1] === "No") {
       setMatch(false);
       setImageType("noMatch");
       setShowImage(true);
+      setCurrStock(arr[currentStockIndex]); 
       setTimeout(() => {
         setShowImage(false);
+        nextStock(); 
       }, 1000);
     }
+  };
+
+  const nextStock = () => {
+    if (currentStockIndex < arr.length - 1) {
+      setCurrentStockIndex(currentStockIndex + 1); 
+    } else {
+      console.log("No more stocks to evaluate.");
+    }
+    {console.log(savedStocks)}
+
   };
 
   useEffect(() => {
@@ -56,6 +72,10 @@ const LandingPage = ({ serialData }) => {
       handleSerialToggle(serialData);
     }
   }, [serialData]);
+
+  useEffect(() => {
+    setCurrStock(arr[currentStockIndex]);
+  }, [currentStockIndex]);
 
   const handleInputChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
@@ -69,6 +89,7 @@ const LandingPage = ({ serialData }) => {
       <div className='absolute right-0 px-12 py-2 bg-white rounded-xl mt-10 mr-12'>
         <button onClick={handleFinish}>Finish</button>
       </div>
+
 
       <div className="flex space-x-4 hover ml-5 mb-32">
         <div className="spline-character">
@@ -114,7 +135,7 @@ const LandingPage = ({ serialData }) => {
 
       <div className="flex">
         <div className="absolute bottom-32 ml-16 w-3/5 px-24 py-8 rounded-2xl text-white text-4xl text-center border-2 border-white font-bold shadow-white-glow animate-slow-bounce">
-          AAPL
+          {currStock}
         </div>
 
         <Popup

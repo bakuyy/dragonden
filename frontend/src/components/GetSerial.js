@@ -24,7 +24,6 @@ const GetSerial = () => {
 
   return (
     <div>
-      {console.log(serialData,"hI")}
       {serialData ? (
         <LandingPage serialData={serialData} />  
       ) : (
