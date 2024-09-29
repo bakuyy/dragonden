@@ -4,11 +4,17 @@ import io
 import threading
 import time
 from openai import OpenAI  
+from dotenv import load_dotenv
+import os
+from openai import OpenAI
 
 pygame.mixer.init()
+load_dotenv()
 
-elevenlabs_api_key = ""
-client = OpenAI(api_key="")  # Create an OpenAI client instance
+elevenlabs_api_key = "sk_5e5eb138fd80c45fba129805dd087095f9f5ca77baac59f2"
+api_key = os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(api_key=api_key)
 
 voice_ids = {
     "sustainability": "TxGEqnHWrfWFTfGW9XjX",
