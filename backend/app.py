@@ -4,6 +4,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import threading
 from conversationMain import interact_with_bird_by_id 
+from flask_cors import CORS
 
 load_dotenv()
 
@@ -121,4 +122,5 @@ def select_bird():
         return jsonify({"message": f"Bird {bird_id} is already speaking about {stock_ticker}."}), 200
 
 if __name__ == '__main__':
+    CORS(app)
     app.run()
