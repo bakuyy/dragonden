@@ -30,7 +30,7 @@ const HomePage = withAuthInfo((props) => {
             {/* Welcome Section */}
             <div className="w-full flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 md:space-x-12 mt-16">
                 <div className="text-center md:text-left md:w-3/5 "> {/* 60% of the width */}
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">Welcome to the App</h1>
+                    <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">Flock$tock</h1>
                     
                     <p className="text-lg md:text-xl text-white mb-4 mt-16">
                         Ready to start your stock investing journey but don’t know where to begin? Our app makes it easy, fun, and tailored just for you!

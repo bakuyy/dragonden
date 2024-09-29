@@ -40,6 +40,7 @@ def read_serial():
             if len(state) > 1:
                 direction = state[1].strip()
                 handle_serial_toggle(direction)
+            print(state)
 
 def handle_serial_toggle(direction):
     global select_index

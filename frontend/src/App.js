@@ -3,9 +3,12 @@ import HomePage from './components/homePage'; // Import HomePage
 import LandingPage from './components/LandingPage';
 import GetSerial from "./components/GetSerial"
 import StreamlitDashboard from './components/StreamlitDashboard';
+import Navbar from './components/Navbar';
 const YourApp = () => {
     return (
         <Router>
+            <Navbar/>
+
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="*" element={<div>404 Not Found</div>} />

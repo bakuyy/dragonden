@@ -86,7 +86,7 @@ const LandingPage = ({ serialData }) => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className='absolute right-0 px-12 py-2 bg-white rounded-xl mt-10 mr-12'>
+      <div className='absolute right-0 top-8 px-12 py-2 bg-white rounded-xl mt-10 mr-24'>
         <button onClick={handleFinish}>Finish</button>
       </div>
 
@@ -141,7 +141,7 @@ const LandingPage = ({ serialData }) => {
         <Popup
           trigger={
             <div className="absolute bottom-32 right-24 ml-12 w-1/5 bg-white px-24 py-8 rounded-2xl text-[#6D37D9] text-4xl font-bold text-center cursor-pointer">
-              ···
+              Chirp In !
             </div>
           }
           modal
