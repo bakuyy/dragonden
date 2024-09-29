@@ -19,7 +19,7 @@ last_bird_id = None
 current_bird_id=None
 
 
-def generate_stock_recommendations(amount, risk_level, additional_info):
+def generate_stock_recommendations(additional_info):
     messages = [
         {
             "role": "system",
@@ -28,8 +28,7 @@ def generate_stock_recommendations(amount, risk_level, additional_info):
         {
             "role": "user",
             "content": (
-                f"A user wants to invest ${amount}. They have a risk tolerance of {risk_level} "
-                f"on a scale of 1 to 10. {additional_info}. Based on these preferences, suggest "
+                f"Their preferences are: {additional_info}. Based on these preferences, suggest "
                 "a list of 100 stocks they should consider investing in. Provide the list of stock "
                 "tickers separated by a comma. For example their format should look like this: MSFT, AAPL, AMZN and so on. No other text output"
             )
@@ -72,11 +71,9 @@ def get_bird_status():
 def get_recommendations():
     global stock_recommendations
     data = request.json
-    amount = data.get('amount')
-    risk_level = data.get('risk_level')
     additional_info = data.get('additional_info', "")
 
-    stock_recommendations = generate_stock_recommendations(amount, risk_level, additional_info)
+    stock_recommendations = generate_stock_recommendations(additional_info)
     return jsonify({"recommendations": stock_recommendations})
 
 @app.route('/api/next_stock', methods=['GET'])
@@ -123,4 +120,4 @@ def select_bird():
 
 if __name__ == '__main__':
     CORS(app)
-    app.run()
+    app.run(port=5000)
