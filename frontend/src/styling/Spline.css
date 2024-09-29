@@ -1,0 +1,45 @@
+spline-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    width: 100vw;
+
+    height: 100vh;
+
+  }
+
+  
+
+  .spline-character {
+
+    position: relative;
+
+    width: 500px;
+
+    height: 500px;
+
+  }
+
+  
+
+  .spline-character .overlay {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    z-index: 1; /* Renders this on top of State 0 */
+
+  }

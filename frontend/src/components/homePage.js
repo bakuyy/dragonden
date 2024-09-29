@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRedirectFunctions, useLogoutFunction, withAuthInfo } from '@propelauth/react';
 import Spline from '@splinetool/react-spline';
+import Welcome from '../images/homePage.png'
 
 const advisors = [
     {
@@ -81,7 +82,7 @@ const HomePage = withAuthInfo((props) => {
 
       
                 <div className="welcome-image md:w-2/5"> {/* 40% of the width */}
-                    <img src="/homePage.png" alt="Welcome" className="rounded-xl shadow-lg max-w-full md:max-w-md"/>
+                    <img src={Welcome} alt="Welcome" className="rounded-xl shadow-lg max-w-full md:max-w-md"/>
                 </div>
             </div>
             <div className="my-12 border-t border-white w-full"></div>
