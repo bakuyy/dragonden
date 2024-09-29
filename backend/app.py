@@ -17,9 +17,10 @@ stock_recommendations = []
 
 last_bird_id = None
 current_bird_id=None
+curr_stock=None
 
 
-def generate_stock_recommendations(amount, risk_level, additional_info):
+def generate_stock_recommendations(additional_info):
     messages = [
         {
             "role": "system",
@@ -28,8 +29,7 @@ def generate_stock_recommendations(amount, risk_level, additional_info):
         {
             "role": "user",
             "content": (
-                f"A user wants to invest ${amount}. They have a risk tolerance of {risk_level} "
-                f"on a scale of 1 to 10. {additional_info}. Based on these preferences, suggest "
+                f"Their preferences are: {additional_info}. Based on these preferences, suggest "
                 "a list of 100 stocks they should consider investing in. Provide the list of stock "
                 "tickers separated by a comma. For example their format should look like this: MSFT, AAPL, AMZN and so on. No other text output"
             )
@@ -72,11 +72,9 @@ def get_bird_status():
 def get_recommendations():
     global stock_recommendations
     data = request.json
-    amount = data.get('amount')
-    risk_level = data.get('risk_level')
     additional_info = data.get('additional_info', "")
 
-    stock_recommendations = generate_stock_recommendations(amount, risk_level, additional_info)
+    stock_recommendations = generate_stock_recommendations(additional_info)
     return jsonify({"recommendations": stock_recommendations})
 
 @app.route('/api/next_stock', methods=['GET'])
@@ -84,6 +82,7 @@ def get_next_stock():
     global stock_recommendations
     if stock_recommendations:
         next_stock = stock_recommendations.pop(0)
+        curr_stock=next_stock
         return next_stock, 200
     else:
         return jsonify({"message": "No more stocks left!"}), 404
@@ -94,7 +93,7 @@ def select_bird():
 
     data = request.json
     bird_id = data.get('bird_id')
-    stock_ticker = data.get('stock_ticker', 'GOOGL')  
+    stock_ticker = curr_stock
 
     if bird_id is None:
         return jsonify({"error": "bird_id is required"}), 400
@@ -123,4 +122,4 @@ def select_bird():
 
 if __name__ == '__main__':
     CORS(app)
-    app.run()
+    app.run(port=5000)

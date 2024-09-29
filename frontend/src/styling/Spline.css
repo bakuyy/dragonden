@@ -15,19 +15,34 @@ spline-container {
   }
 
   
-
-  .spline-character {
-
-    position: relative;
-
+  .spline-character1 {
+    position: absolute;  
     width: 500px;
-
     height: 500px;
-
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%,-50%);
+  }
+  
+  .spline-character2 {
+    position: absolute; 
+    width: 500px;
+    height: 500px;
+    top: 45%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .spline-character3 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 42%; 
+    left: 57%;
+    transform: translate(-50%, -50%);
   }
 
   
-
   .spline-character .overlay {
 
     position: absolute;
@@ -40,6 +55,6 @@ spline-container {
 
     height: 100%;
 
-    z-index: 1; /* Renders this on top of State 0 */
+    z-index: 1; 
 
   }

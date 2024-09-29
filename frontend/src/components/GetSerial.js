@@ -7,7 +7,7 @@ const GetSerial = () => {
   useEffect(() => {
     const fetchSerialData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/getAction');
+        const response = await fetch('http://localhost:5001/getAction');
         const data = await response.json();
         setSerialData(data);
       } catch (error) {

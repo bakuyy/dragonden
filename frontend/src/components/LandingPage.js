@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from 'reactjs-popup';
+import Popup from "reactjs-popup";
 import Heart from "../images/tinderheart.png";
 import NoMatch from "../images/no.webp";
-import Spline from '@splinetool/react-spline';
-import 'reactjs-popup/dist/index.css';
-import '../styling/Spline.css';
+import Spline from "@splinetool/react-spline";
+import "reactjs-popup/dist/index.css";
+import "../styling/Spline.css";
 
 const LandingPage = ({ serialData }) => {
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ const LandingPage = ({ serialData }) => {
   const [imageType, setImageType] = useState("");
   const [text, setText] = useState("");
   const [currStock, setCurrStock] = useState("");
-  const arr = ['AAPL', 'MICROSOFT', 'GOOGL', 'AMZN']; 
-  const [currentStockIndex, setCurrentStockIndex] = useState(0); 
-  const [savedStocks,setSavedStocks] = useState([])
+  const arr = ["AAPL", "MICROSOFT", "GOOGL", "AMZN"];
+  const [currentStockIndex, setCurrentStockIndex] = useState(0);
+  const [savedStocks, setSavedStocks] = useState([]);
   const handleFinish = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const handleText = (e) => {
@@ -29,7 +29,7 @@ const LandingPage = ({ serialData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted text:', text);
+    console.log("Submitted text:", text);
   };
 
   const handleSerialToggle = (data) => {
@@ -39,32 +39,33 @@ const LandingPage = ({ serialData }) => {
       setMatch(true);
       setImageType("match");
       setShowImage(true);
-      setCurrStock(arr[currentStockIndex]); 
+      setCurrStock(arr[currentStockIndex]);
       setTimeout(() => {
         setShowImage(false);
-        nextStock(); 
+        nextStock();
       }, 1000);
-      setSavedStocks((prevSaved) => [...prevSaved, arr[currentStockIndex]]); 
+      setSavedStocks((prevSaved) => [...prevSaved, arr[currentStockIndex]]);
     } else if (data[1] === "No") {
       setMatch(false);
       setImageType("noMatch");
       setShowImage(true);
-      setCurrStock(arr[currentStockIndex]); 
+      setCurrStock(arr[currentStockIndex]);
       setTimeout(() => {
         setShowImage(false);
-        nextStock(); 
+        nextStock();
       }, 1000);
     }
   };
 
   const nextStock = () => {
     if (currentStockIndex < arr.length - 1) {
-      setCurrentStockIndex(currentStockIndex + 1); 
+      setCurrentStockIndex(currentStockIndex + 1);
     } else {
       console.log("No more stocks to evaluate.");
     }
-    {console.log(savedStocks)}
-
+    {
+      console.log(savedStocks);
+    }
   };
 
   useEffect(() => {
@@ -86,39 +87,32 @@ const LandingPage = ({ serialData }) => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className='absolute right-0 top-8 px-12 py-2 bg-white rounded-xl mt-10 mr-24'>
+      <div className="absolute right-0 top-8 px-12 py-2 bg-white rounded-xl mt-10 mr-24">
         <button onClick={handleFinish}>Finish</button>
       </div>
 
-
-      <div className="flex space-x-4 hover ml-5 mb-32">
-        <div className="spline-character">
-          <Spline scene="https://prod.spline.design/82gSsm7wjc-ugja7/scene.splinecode" />
-          {selectIndex === 0 && (
-            <Spline
-              scene="https://prod.spline.design/a2IWM6qn1r-q8Aqu/scene.splinecode"
-              className="overlay"
-            />
+      <div className="flex ">
+        <div className="spline-character1">
+          {selectIndex === 0 ? (
+            <Spline scene="https://prod.spline.design/a2IWM6qn1r-q8Aqu/scene.splinecode" />
+          ) : (
+            <Spline scene="https://prod.spline.design/82gSsm7wjc-ugja7/scene.splinecode" />
           )}
         </div>
 
-        <div className="spline-character">
-          <Spline scene="https://prod.spline.design/rJWsDUbRib-nVYB3/scene.splinecode" />
-          {selectIndex === 1 && (
-            <Spline
-              scene="https://prod.spline.design/BglYE7jKXRL8UZ8D/scene.splinecode"
-              className="overlay"
-            />
+        <div className="spline-character2">
+          {selectIndex === 1 ? (
+            <Spline scene="https://prod.spline.design/BglYE7jKXRL8UZ8D/scene.splinecode" />
+          ) : (
+            <Spline scene="https://prod.spline.design/rJWsDUbRib-nVYB3/scene.splinecode" />
           )}
         </div>
 
-        <div className="spline-character">
-          <Spline scene="https://prod.spline.design/kcOMX-bu-HV6x4Hj/scene.splinecode" />
-          {selectIndex === 2 && (
-            <Spline
-              scene="https://prod.spline.design/LLtNuOqC7rj2EXKu/scene.splinecode"
-              className="overlay"
-            />
+        <div className="spline-character3">
+          {selectIndex === 2 ? (
+            <Spline scene="https://prod.spline.design/LLtNuOqC7rj2EXKu/scene.splinecode" />
+          ) : (
+            <Spline scene="https://prod.spline.design/kcOMX-bu-HV6x4Hj/scene.splinecode" />
           )}
         </div>
       </div>
@@ -150,7 +144,9 @@ const LandingPage = ({ serialData }) => {
           {(close) => (
             <div className="modal bg-white p-8 rounded-lg shadow-lg">
               <div className="modal-content">
-                <h2 className="text-xl font-bold mb-4 text-red">Tell us about your interests, values and budget...</h2>
+                <h2 className="text-xl font-bold mb-4 text-red">
+                  Tell us about your interests, values and budget...
+                </h2>
                 <form onSubmit={handleSubmit}>
                   <textarea
                     onChange={handleText}
