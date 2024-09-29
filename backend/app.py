@@ -17,6 +17,7 @@ stock_recommendations = []
 
 last_bird_id = None
 current_bird_id=None
+curr_stock=None
 
 
 def generate_stock_recommendations(additional_info):
@@ -81,6 +82,7 @@ def get_next_stock():
     global stock_recommendations
     if stock_recommendations:
         next_stock = stock_recommendations.pop(0)
+        curr_stock=next_stock
         return next_stock, 200
     else:
         return jsonify({"message": "No more stocks left!"}), 404
@@ -91,7 +93,7 @@ def select_bird():
 
     data = request.json
     bird_id = data.get('bird_id')
-    stock_ticker = data.get('stock_ticker', 'GOOGL')  
+    stock_ticker = curr_stock
 
     if bird_id is None:
         return jsonify({"error": "bird_id is required"}), 400
