@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import Popup from 'reactjs-popup'; // Importing reactjs-popup
+import Popup from 'reactjs-popup';
 import Heart from "../images/tinderheart.png";
 import NoMatch from "../images/no.webp";
 import Spline from '@splinetool/react-spline';
-import 'reactjs-popup/dist/index.css'; // Importing popup styles
-import '../styling/Spline.css'; // Assuming you have custom styles here
+import 'reactjs-popup/dist/index.css';
+import '../styling/Spline.css';
 
 const LandingPage = ({ serialData }) => {
   const navigate = useNavigate();
-  const dragon_count = 3; // Total number of dragon characters
-  const [selectIndex, setSelectIndex] = useState(0); // Determines the selected character and also xValue
+  const dragon_count = 3;
+  const [selectIndex, setSelectIndex] = useState(0);
   const [match, setMatch] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [imageType, setImageType] = useState("");
-  const [text, setText]= useState(""); // State to store input text
+  const [text, setText] = useState("");
 
   const handleFinish = () => {
     navigate('/');
   };
 
   const handleText = (e) => {
-    e.preventDefault(); // Corrected this line
-    setText(e.target.value); // Set the input value as text
-    console.log(e.target.value);
+    setText(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted text:', text);
   };
 
   const handleSerialToggle = (data) => {
@@ -57,20 +60,17 @@ const LandingPage = ({ serialData }) => {
   const handleInputChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
     if (newValue >= 0 && newValue < dragon_count) {
-      setSelectIndex(newValue); // Update selectIndex when input changes
+      setSelectIndex(newValue);
     }
   };
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      {/* Top right button */}
       <div className='absolute right-0 px-12 py-2 bg-white rounded-xl mt-10 mr-12'>
         <button onClick={handleFinish}>Finish</button>
       </div>
 
-      {/* Character boxes with spline rendering */}
       <div className="flex space-x-4 hover ml-5 mb-32">
-        {/* Character 1 */}
         <div className="spline-character">
           <Spline scene="https://prod.spline.design/82gSsm7wjc-ugja7/scene.splinecode" />
           {selectIndex === 0 && (
@@ -81,7 +81,6 @@ const LandingPage = ({ serialData }) => {
           )}
         </div>
 
-        {/* Character 2 */}
         <div className="spline-character">
           <Spline scene="https://prod.spline.design/rJWsDUbRib-nVYB3/scene.splinecode" />
           {selectIndex === 1 && (
@@ -92,7 +91,6 @@ const LandingPage = ({ serialData }) => {
           )}
         </div>
 
-        {/* Character 3 */}
         <div className="spline-character">
           <Spline scene="https://prod.spline.design/kcOMX-bu-HV6x4Hj/scene.splinecode" />
           {selectIndex === 2 && (
@@ -104,7 +102,6 @@ const LandingPage = ({ serialData }) => {
         </div>
       </div>
 
-      {/* Match/No Match images */}
       {showImage && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {imageType === "match" ? (
@@ -115,14 +112,12 @@ const LandingPage = ({ serialData }) => {
         </div>
       )}
 
-      {/* Footer and Modal Trigger */}
       <div className="flex">
         <div className="absolute bottom-32 ml-16 w-3/5 px-24 py-8 rounded-2xl text-white text-4xl text-center border-2 border-white font-bold shadow-white-glow animate-slow-bounce">
           AAPL
         </div>
 
-        {/* Modal Trigger */}
-        <Popup 
+        <Popup
           trigger={
             <div className="absolute bottom-32 right-24 ml-12 w-1/5 bg-white px-24 py-8 rounded-2xl text-[#6D37D9] text-4xl font-bold text-center cursor-pointer">
               ···
@@ -134,12 +129,24 @@ const LandingPage = ({ serialData }) => {
           {(close) => (
             <div className="modal bg-white p-8 rounded-lg shadow-lg">
               <div className="modal-content">
-                <h2 className="text-xl font-bold mb-4">Modal Content</h2>
-                <p>This is some content inside the modal!</p>
-                <input onChange={handleText} placeholder="Enter some text" />
-                <p className="mt-4">Text Entered: {text}</p>
-                <button 
-                  className="mt-4 px-6 py-2 bg-[#6D37D9] text-white rounded-lg"
+                <h2 className="text-xl font-bold mb-4 text-red">Tell us about your interests, values and budget...</h2>
+                <form onSubmit={handleSubmit}>
+                  <textarea
+                    onChange={handleText}
+                    value={text}
+                    placeholder="Enter some text"
+                    className="mb-4 p-2 border rounded w-full h-32"
+                  />
+
+                  <button
+                    type="submit"
+                    className="mt-4 px-6 py-2 bg-[#6D37D9] text-white rounded-lg"
+                  >
+                    Submit
+                  </button>
+                </form>
+                <button
+                  className="mt-4 px-6 py-2 bg-gray-400 text-white rounded-lg"
                   onClick={close}
                 >
                   Close
