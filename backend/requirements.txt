@@ -1,0 +1,8 @@
+pyserial
+Flask
+flask
+flask-cors
+requests
+pygame
+python-dotenv
+openai
